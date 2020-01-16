@@ -3,9 +3,9 @@ session_start();
 $elements = [
     ["title" => "Home", "link" => "index.php"],
     ["title" => "XI", "link" => "XI.php"],
-    ["title" => "Top Players", "link" => "index.php"],
-    ["title" => "Top Teams", "link" => "index.php"],
-    ["title" => "Players Database", "link" => "index.php"]
+    ["title" => "User Ranking", "link" => "index.php"],
+    ["title" => "Team Ranking", "link" => "team-ranking.php"],
+    ["title" => "Players", "link" => "players.php"]
 ];
 $header = "
 <div class='row subheader-row navbar-dark bg-dark'>

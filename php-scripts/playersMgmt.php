@@ -27,5 +27,31 @@
         $json = json_encode($players);
         return $json;
     }
-    echo getPlayers($con, $_POST['qty_st'], $_POST['qty_md'], $_POST['qty_df']);
+    function getAllPlayers($connection){
+        $query_delanteros = mysqli_query($connection,"SELECT * FROM Jugadores WHERE Pos = 'delantero'");
+        $array_delanteros = [];
+        $query_centrocampistas = mysqli_query($connection,"SELECT * FROM Jugadores WHERE Pos = 'centrocampista'");
+        $array_centrocampistas = [];
+        $query_defensas = mysqli_query($connection,"SELECT * FROM Jugadores WHERE Pos = 'defensa'");
+        $array_defensas = [];
+        $query_porteros = mysqli_query($connection,"SELECT * FROM Jugadores WHERE Pos = 'portero'");
+        $array_porteros = [];
+        foreach ($query_delanteros as $value) {
+            array_push($array_delanteros, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
+        }
+        foreach ($query_centrocampistas as $value) {
+            array_push($array_centrocampistas, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
+        }
+        foreach ($query_defensas as $value) {
+            array_push($array_defensas, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
+        }
+        foreach ($query_porteros as $value) {
+            array_push($array_porteros, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
+        }
+        $players = ["delanteros" => $array_delanteros, "centrocampistas" => $array_centrocampistas, "defensas" =>  $array_defensas, "porteros" => $array_porteros];
+        $json = json_encode($players);
+        return $json;
+    }
+    echo $_POST['action'] == 'getPlayers' ? getPlayers($con, $_POST['qty_st'], $_POST['qty_md'], $_POST['qty_df']) : null;
+    echo  $_POST['action'] == 'getAllPlayers' ? getAllPlayers($con) : null;
 ?>

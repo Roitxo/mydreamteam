@@ -8,13 +8,97 @@ var team = {
   porteros: null,
   form: '433'
 };
+var limit = 20;
 //methods
+function getBestTeams(){
+  var form = new FormData();
+  form.append("action", "getBest");
+  form.append("limit", limit);
+  axios.post("php-scripts/teamMgmt.php", form)
+    .then(response =>{
+      console.log(response.data);
+      response.data.forEach((element, index) => {
+        document.getElementById("table-best-teams").innerHTML += `
+          <tr>
+            <th scope="row">${index + 1}</th>
+            <td>${element.user}</td>
+            <td>${element.valoracion}</td>
+            <td>${element.formacion}</td>
+            <td>${element.fecha}</td>
+            <td><a href="team.php?id=${element.id}" class="btn btn-dark">View</a></td>
+          </tr>
+        `;
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
+function getAllPlayers(){
+  var formData = new FormData();
+  formData.append("action", 'getAllPlayers');
+  axios
+    .post("php-scripts/playersMgmt.php", formData)
+    .then(response => {
+      players = response.data;
+      console.log(players);
+      players.delanteros.forEach(element =>{
+        var html = `
+          <div class="col-2">
+              <div class="card">
+                <img class="d-block w-100" src="${element.Imagen}" alt="Third slide" />
+              </div>
+              <p class="inline"><span class="color-green media inline">${element.media}</span> ${element.nombre}</p>
+          </div>   
+        `;
+        document.getElementById("strikers").innerHTML += html;
+      })
+      players.centrocampistas.forEach(element =>{
+        var html = `
+          <div class="col-2">
+              <div class="card">
+                <img class="d-block w-100" src="${element.Imagen}" alt="Third slide" />
+              </div>
+              <p class="inline"><span class="color-green media inline">${element.media}</span> ${element.nombre}</p>
+          </div>   
+        `;
+        document.getElementById("mid").innerHTML += html;
+      })
+      players.defensas.forEach(element =>{
+        var html = `
+          <div class="col-2">
+              <div class="card">
+                <img class="d-block w-100" src="${element.Imagen}" alt="Third slide" />
+              </div>
+              <p class="inline"><span class="color-green media inline">${element.media}</span> ${element.nombre}</p>
+          </div>   
+        `;
+        document.getElementById("defenders").innerHTML += html;
+      })
+      players.porteros.forEach(element =>{
+        var html = `
+          <div class="col-2">
+              <div class="card">
+                <img class="d-block w-100" src="${element.Imagen}" alt="Third slide" />
+              </div>
+              <p class="inline"><span class="color-green media inline">${element.media}</span> ${element.nombre}</p>
+          </div>   
+        `;
+        document.getElementById("goalkeepers").innerHTML += html;
+      })
+    })
+    
+    .catch(error => {
+      console.log(error);
+    });
+}
 function getPlayers(formation) {
   var formData = new FormData();
   if (formation == "433") {
     formData.append("qty_st", 9); 
     formData.append("qty_md", 9);
     formData.append("qty_df", 12);
+    formData.append("action", 'getPlayers');
   }
   axios
     .post("php-scripts/playersMgmt.php", formData)

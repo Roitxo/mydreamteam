@@ -1,19 +1,5 @@
 <?php
-if (isset($_GET['user'])) {
-    include("php-scripts/configuration.php");
-    $user = $_GET['user'];
-    $mine = !isset($_SESSION['nombre']) ? false : true;
-    $con = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DB);
-    $query = mysqli_query($con, "SELECT * FROM usuarios WHERE Nombre = '$user'");
-    $assoc = mysqli_fetch_assoc($query);
-    $id = $assoc['Id'];
-    $num = mysqli_num_rows($query);
-    $q_equipos = mysqli_query($con, "SELECT * FROM usuarios AS U INNER JOIN plantillas AS P ON U.Id = P.idUsuario WHERE Nombre = '$user'");
-    $equipos = mysqli_fetch_array($query);
-} else {
-    header('Location: index.php');
-}
-
+include("components/header.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,22 +16,34 @@ if (isset($_GET['user'])) {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="js/XI.js"></script>
     <script src="js/login.js"></script>
     <title>TeamMaker</title>
 </head>
 
-<body>
+<body onload="getAllPlayers()">
     <?php
-        include("components/header.php");
-        echo $header;
+    echo $header;
     ?>
     <div class="jumbotron jumbotron-fluid call-to-action bg-dark">
         <div class="container">
-            <h1 class="display-4"><?php echo $num > 0 ? $user : "The user does not exist"; ?></h1>
-            <p class="lead">User profile</p>
+            <h1 class="display-4">Players Database</h1>
+            <p class="lead">All players on the game</p>
         </div>
     </div>
-    
+    <div class="container">
+        <h1 class="display-4">Strikers</h1>
+        <div id="strikers" class="row"></div>
+        <h1 class="display-4">Midfielders</h1>
+        <div id="mid" class="row"></div>
+        <h1 class="display-4">Defenders</h1>
+        <div id="defenders" class="row">
+        </div>
+        <h1 class="display-4">Goalkeepers</h1>
+        <div id="goalkeepers" class="row">
+        </div>
+    </div>
+
 </body>
 
 </html>

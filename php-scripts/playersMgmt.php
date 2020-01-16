@@ -12,16 +12,16 @@
         $query_porteros = mysqli_query($conexion,"SELECT * FROM Jugadores WHERE Pos = 'portero' ORDER BY Rand() LIMIT 3");
         $array_porteros = [];
         foreach ($query_delanteros as $value) {
-            array_push($array_delanteros, ["nombre"=> $value["Nombre"], "media" => $value["Media"], "Imagen" => $value["Imagen"]]);
+            array_push($array_delanteros, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
         }
         foreach ($query_centrocampistas as $value) {
-            array_push($array_centrocampistas, ["nombre"=> $value["Nombre"], "media" => $value["Media"], "Imagen" => $value["Imagen"]]);
+            array_push($array_centrocampistas, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
         }
         foreach ($query_defensas as $value) {
-            array_push($array_defensas, ["nombre"=> $value["Nombre"], "media" => $value["Media"], "Imagen" => $value["Imagen"]]);
+            array_push($array_defensas, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
         }
         foreach ($query_porteros as $value) {
-            array_push($array_porteros, ["nombre"=> $value["Nombre"], "media" => $value["Media"], "Imagen" => $value["Imagen"]]);
+            array_push($array_porteros, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
         }
         $players = ["delanteros" => $array_delanteros, "centrocampistas" => $array_centrocampistas, "defensas" =>  $array_defensas, "porteros" => $array_porteros];
         $json = json_encode($players);

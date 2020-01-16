@@ -26,6 +26,55 @@
     opacity: 1;
   }
 }
+@-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+@keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+.swing-in-top-fwd {
+	-webkit-animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+}
+.form input{
+  width: 65%;
+}
+#app{
+  padding: 6% 0% 6% 0%;
+}
+#summary{
+  padding: 3%;
+  display: none;
+}
 .fade-in1 {
   -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
@@ -63,6 +112,11 @@ footer p {
 .nomargin {
   margin: 0;
 }
+#navbar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
 #subheader-col-2 small,
 #subheader-col-2 i {
   color: #d3cfcf;
@@ -72,6 +126,9 @@ footer p {
 }
 .nav {
   font-family: "Roboto Condensed", sans-serif;
+}
+.link-active{
+  color: #343a40;
 }
 .bg-green {
   background-color: #c9d99e;
@@ -86,6 +143,8 @@ footer p {
   width: 100px;
   background-color: #343a40;
   margin-left: 15%;
+  box-shadow: 0px 3px 51px 0px rgba(0,0,0,0.34);
+  z-index: 25;
 }
 .jumbo-home {
   background-image: url(https://cdn.pixabay.com/photo/2015/09/09/17/18/stadium-931975_1280.jpg);
@@ -184,6 +243,7 @@ footer p {
   padding: 5%;
 }
 #dialogChoosePlayerInner {
+  margin-top: 7%;
   border-radius: 20px;
   background-color: white;
   padding: 2%;

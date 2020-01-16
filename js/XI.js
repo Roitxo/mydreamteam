@@ -1,5 +1,6 @@
 //data
 var players = new Object();
+var counter = 0;
 var team = {
   delanteros: [],
   centrocampistas: [],
@@ -72,19 +73,58 @@ function modalPlayer(){
 function addPlayer(id,pos,index) {
   document.getElementById("dialogChoosePlayer").style.display = "none";
   if (pos == "delantero") {
+    counter++;
     document.getElementById(id).innerHTML = `<img class="d-block w-100" src="${players.delanteros[index].Imagen}" alt="Third slide" />`;
     team.delanteros.push(players.delanteros[index]);
   } else if (pos == "centrocampista"){
+    counter++;
     document.getElementById(id).innerHTML = `<img class="d-block w-100" src="${players.centrocampistas[index].Imagen}" alt="Third slide" />`;
     team.centrocampistas.push(players.centrocampistas[index]);
   } else if (pos == "defensa") {
+    counter++;
     document.getElementById(id).innerHTML = `<img class="d-block w-100" src="${players.defensas[index].Imagen}" alt="Third slide" />`;
     team.defensas.push(players.defensas[index]);
   } else if (pos = "portero"){
+    counter++;
     document.getElementById(id).innerHTML = `<img class="d-block w-100" src="${players.porteros[index].Imagen}" alt="Third slide" />`;
     team.portero = players.porteros[index];
   }
-  
   console.table(team);
+  if (counter == 11) end();
+
+}
+function end(){
+  var total = 0;
+  var media = 0;
+  team.delanteros.forEach(element => {
+    total += element.media;
+  })
+  team.centrocampistas.forEach(element => {
+    total += element.media;
+  })
+  team.defensas.forEach(element => {
+    total += element.media;
+  })
+  total += team.portero.media;
+
+  media = total / 11;
+  window.scrollTo(0, 0);
+
+  //insert team
+  var form = new FormData();
+  form.append("userid", document.getElementById("userid").value);
+  form.append("avg", media.toFixed(2));
+  form.append("action", "insert");
+  form.append("team", JSON.stringify(team));
+  axios.post('php-scripts/teamMgmt.php', form)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  //display summary
+  document.getElementById("rating").innerHTML = media.toFixed(2);
+  document.getElementById("summary").style.display = "inline";
 }
 //mounted

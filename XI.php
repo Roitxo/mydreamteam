@@ -1,3 +1,9 @@
+<?php
+    include("components/header.php");
+    if (!isset($_SESSION['nombre'])) {
+    header('Location: login.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,50 +20,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
     <script src="js/XI.js"></script>
+    <script src="js/login.js"></script>
     <title>TeamMaker</title>
 </head>
 
 <body onload="getPlayers('433', 9)">
-    <div class="row subheader-row navbar-dark bg-dark">
-        <div class="col-10 subheader-col "></div>
-        <div id="subheader-col-2" class="col-2 subheader-col ">
-            <i class="fas fa-sign-in-alt"></i>
-            <small class="nomargin">Log In</small>
-        </div>
-    </div>
-    <nav id="navbar" class="navbar-dark bg-green">
-        <div class="row align-items-center">
-            <div class="col-2 logo-box">
-                <a href="#">
-                    <img src="img/logo.png" alt="logo" id="logo" />
-                </a>
-            </div>
-            <div class="col-8">
-                <ul class="nav">
-                    <li class="nav-item"></li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
+    echo $header;
+    ?>
     <div class="jumbotron jumbotron-fluid call-to-action bg-dark">
         <div class="container">
             <h1 class="display-4">Create your XI</h1>
             <p class="lead">Let's start!</p>
         </div>
     </div>
-
+    <center>
+        <div class="row">
+            <div id="summary" class="col-sm swing-in-top-fwd">
+                <h1><span class="color-green" id="rating"></span></h1>
+                <h2>YOUR RATING</h2>
+                <p>Your team has been saved on your profile</p>
+                <button class="btn btn-dark">See Ranking</button>
+                <a href="XI.php" class="btn btn-success">Try Again</a>
+            </div>
+        </div>
+    </center>
+    <input type="number" hidden id="userid" value="<?php echo  $_SESSION['id'];?>">
     <div id="433" class="row pitch">
         <div class="container">
             <center>

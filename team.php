@@ -84,7 +84,7 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div id="mc3" class="card">ç
+                        <div id="mc3" class="card">
                             <img class="d-block w-100" src="<?php echo $team['centrocampistas'][2]['Imagen']; ?>" alt="Third slide" />
                         </div>
                     </div>

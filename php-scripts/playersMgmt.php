@@ -3,13 +3,13 @@
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DB);
     mysqli_set_charset($con,'utf8');
     function getPlayers($conexion, $qty_st, $qty_md, $qty_df){
-        $query_delanteros = mysqli_query($conexion,"SELECT * FROM Jugadores WHERE Pos = 'delantero' ORDER BY Rand() LIMIT $qty_st");
+        $query_delanteros = mysqli_query($conexion,"SELECT * FROM jugadores WHERE Pos = 'delantero' ORDER BY Rand() LIMIT $qty_st");
         $array_delanteros = [];
-        $query_centrocampistas = mysqli_query($conexion,"SELECT * FROM Jugadores WHERE Pos = 'centrocampista' ORDER BY Rand() LIMIT $qty_md");
+        $query_centrocampistas = mysqli_query($conexion,"SELECT * FROM jugadores WHERE Pos = 'centrocampista' ORDER BY Rand() LIMIT $qty_md");
         $array_centrocampistas = [];
-        $query_defensas = mysqli_query($conexion,"SELECT * FROM Jugadores WHERE Pos = 'defensa' ORDER BY Rand() LIMIT $qty_df");
+        $query_defensas = mysqli_query($conexion,"SELECT * FROM jugadores WHERE Pos = 'defensa' ORDER BY Rand() LIMIT $qty_df");
         $array_defensas = [];
-        $query_porteros = mysqli_query($conexion,"SELECT * FROM Jugadores WHERE Pos = 'portero' ORDER BY Rand() LIMIT 3");
+        $query_porteros = mysqli_query($conexion,"SELECT * FROM jugadores WHERE Pos = 'portero' ORDER BY Rand() LIMIT 3");
         $array_porteros = [];
         foreach ($query_delanteros as $value) {
             array_push($array_delanteros, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);
@@ -28,13 +28,13 @@
         return $json;
     }
     function getAllPlayers($connection){
-        $query_delanteros = mysqli_query($connection,"SELECT * FROM Jugadores WHERE Pos = 'delantero'");
+        $query_delanteros = mysqli_query($connection,"SELECT * FROM jugadores WHERE Pos = 'delantero'");
         $array_delanteros = [];
-        $query_centrocampistas = mysqli_query($connection,"SELECT * FROM Jugadores WHERE Pos = 'centrocampista'");
+        $query_centrocampistas = mysqli_query($connection,"SELECT * FROM jugadores WHERE Pos = 'centrocampista'");
         $array_centrocampistas = [];
-        $query_defensas = mysqli_query($connection,"SELECT * FROM Jugadores WHERE Pos = 'defensa'");
+        $query_defensas = mysqli_query($connection,"SELECT * FROM jugadores WHERE Pos = 'defensa'");
         $array_defensas = [];
-        $query_porteros = mysqli_query($connection,"SELECT * FROM Jugadores WHERE Pos = 'portero'");
+        $query_porteros = mysqli_query($connection,"SELECT * FROM jugadores WHERE Pos = 'portero'");
         $array_porteros = [];
         foreach ($query_delanteros as $value) {
             array_push($array_delanteros, ["nombre"=> $value["Nombre"], "media" => (int)$value["Media"], "Imagen" => $value["Imagen"]]);

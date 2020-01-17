@@ -25,7 +25,7 @@ function getBestTeams(){
             <td>${element.valoracion}</td>
             <td>${element.formacion}</td>
             <td>${element.fecha}</td>
-            <td><a href="team.php?id=${element.id}" class="btn btn-dark">View</a></td>
+            <td><a href="team.php?id=${element.id}" class="btn btn-dark"><i class="fas fa-eye"></i></a></td>
           </tr>
         `;
       });

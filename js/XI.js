@@ -6,16 +6,17 @@ var team = {
   centrocampistas: [],
   defensas: [],
   porteros: null,
-  form: '433'
+  form: "433"
 };
 var limit = 20;
 //methods
-function getBestTeams(){
+function getBestTeams() {
   var form = new FormData();
   form.append("action", "getBest");
   form.append("limit", limit);
-  axios.post("php-scripts/teamMgmt.php", form)
-    .then(response =>{
+  axios
+    .post("php-scripts/teamMgmt.php", form)
+    .then(response => {
       console.log(response.data);
       response.data.forEach((element, index) => {
         document.getElementById("table-best-teams").innerHTML += `
@@ -25,24 +26,52 @@ function getBestTeams(){
             <td>${element.valoracion}</td>
             <td>${element.formacion}</td>
             <td>${element.fecha}</td>
-            <td><a href="team.php?id=${element.id}" class="btn btn-dark"><i class="fas fa-eye"></i></a></td>
+            <td><a href="team.php?id=${
+              element.id
+            }" class="btn btn-dark"><i class="fas fa-eye"></i></a></td>
           </tr>
         `;
       });
     })
     .catch(error => {
       console.log(error);
-    })
+    });
 }
-function getAllPlayers(){
+function getBestUsers() {
+  var form = new FormData();
+  form.append("action", "getBestU");
+  form.append("limit", limit);
+  axios
+    .post("php-scripts/teamMgmt.php", form)
+    .then(response => {
+      console.log(response.data);
+      response.data.forEach((element, index) => {
+        document.getElementById("table-best-teams").innerHTML += `
+          <tr>
+            <th scope="row">${index + 1}</th>
+            <td>${element.user}</td>
+            <td>${element.valoracion}</td>
+            <td>${element.fecha}</td>
+            <td><a href="team.php?id=${
+              element.id
+            }" class="btn btn-dark"><i class="fas fa-eye"></i></a></td>
+          </tr>
+        `;
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+function getAllPlayers() {
   var formData = new FormData();
-  formData.append("action", 'getAllPlayers');
+  formData.append("action", "getAllPlayers");
   axios
     .post("php-scripts/playersMgmt.php", formData)
     .then(response => {
       players = response.data;
       console.log(players);
-      players.delanteros.forEach(element =>{
+      players.delanteros.forEach(element => {
         var html = `
           <div class="col-2">
               <div class="card">
@@ -52,8 +81,8 @@ function getAllPlayers(){
           </div>   
         `;
         document.getElementById("strikers").innerHTML += html;
-      })
-      players.centrocampistas.forEach(element =>{
+      });
+      players.centrocampistas.forEach(element => {
         var html = `
           <div class="col-2">
               <div class="card">
@@ -63,8 +92,8 @@ function getAllPlayers(){
           </div>   
         `;
         document.getElementById("mid").innerHTML += html;
-      })
-      players.defensas.forEach(element =>{
+      });
+      players.defensas.forEach(element => {
         var html = `
           <div class="col-2">
               <div class="card">
@@ -74,8 +103,8 @@ function getAllPlayers(){
           </div>   
         `;
         document.getElementById("defenders").innerHTML += html;
-      })
-      players.porteros.forEach(element =>{
+      });
+      players.porteros.forEach(element => {
         var html = `
           <div class="col-2">
               <div class="card">
@@ -85,9 +114,9 @@ function getAllPlayers(){
           </div>   
         `;
         document.getElementById("goalkeepers").innerHTML += html;
-      })
+      });
     })
-    
+
     .catch(error => {
       console.log(error);
     });
@@ -95,10 +124,10 @@ function getAllPlayers(){
 function getPlayers(formation) {
   var formData = new FormData();
   if (formation == "433") {
-    formData.append("qty_st", 9); 
+    formData.append("qty_st", 9);
     formData.append("qty_md", 9);
     formData.append("qty_df", 12);
-    formData.append("action", 'getPlayers');
+    formData.append("action", "getPlayers");
   }
   axios
     .post("php-scripts/playersMgmt.php", formData)
@@ -121,7 +150,7 @@ function choosePlayer(num, pos, pos2, callback) {
           </div>
         </div>
         `;
-    } else if(pos == "centrocampista"){
+    } else if (pos == "centrocampista") {
       document.getElementById("dialogChoosePlayerBoxes").innerHTML += `
         <div class="col">
           <div class="card fade-in1">
@@ -129,7 +158,7 @@ function choosePlayer(num, pos, pos2, callback) {
           </div>
         </div>
         `;
-    } else if (pos == "defensa"){
+    } else if (pos == "defensa") {
       document.getElementById("dialogChoosePlayerBoxes").innerHTML += `
         <div class="col">
           <div class="card fade-in1">
@@ -137,7 +166,7 @@ function choosePlayer(num, pos, pos2, callback) {
           </div>
         </div>
         `;
-    } else if (pos == "portero"){
+    } else if (pos == "portero") {
       document.getElementById("dialogChoosePlayerBoxes").innerHTML += `
         <div class="col">
           <div class="card fade-in1">
@@ -146,49 +175,55 @@ function choosePlayer(num, pos, pos2, callback) {
         </div>
         `;
     }
-    
   }
   callback();
   //document.getElementById("dialogChoosePlayer").style.display = "inline";
 }
-function modalPlayer(){
+function modalPlayer() {
   document.getElementById("dialogChoosePlayer").style.display = "inline";
 }
-function addPlayer(id,pos,index) {
+function addPlayer(id, pos, index) {
   document.getElementById("dialogChoosePlayer").style.display = "none";
   if (pos == "delantero") {
     counter++;
-    document.getElementById(id).innerHTML = `<img class="d-block w-100" src="${players.delanteros[index].Imagen}" alt="Third slide" />`;
+    document.getElementById(
+      id
+    ).innerHTML = `<img class="d-block w-100" src="${players.delanteros[index].Imagen}" alt="Third slide" />`;
     team.delanteros.push(players.delanteros[index]);
-  } else if (pos == "centrocampista"){
+  } else if (pos == "centrocampista") {
     counter++;
-    document.getElementById(id).innerHTML = `<img class="d-block w-100" src="${players.centrocampistas[index].Imagen}" alt="Third slide" />`;
+    document.getElementById(
+      id
+    ).innerHTML = `<img class="d-block w-100" src="${players.centrocampistas[index].Imagen}" alt="Third slide" />`;
     team.centrocampistas.push(players.centrocampistas[index]);
   } else if (pos == "defensa") {
     counter++;
-    document.getElementById(id).innerHTML = `<img class="d-block w-100" src="${players.defensas[index].Imagen}" alt="Third slide" />`;
+    document.getElementById(
+      id
+    ).innerHTML = `<img class="d-block w-100" src="${players.defensas[index].Imagen}" alt="Third slide" />`;
     team.defensas.push(players.defensas[index]);
-  } else if (pos = "portero"){
+  } else if ((pos = "portero")) {
     counter++;
-    document.getElementById(id).innerHTML = `<img class="d-block w-100" src="${players.porteros[index].Imagen}" alt="Third slide" />`;
+    document.getElementById(
+      id
+    ).innerHTML = `<img class="d-block w-100" src="${players.porteros[index].Imagen}" alt="Third slide" />`;
     team.portero = players.porteros[index];
   }
   console.table(team);
   if (counter == 11) end();
-
 }
-function end(){
+function end() {
   var total = 0;
   var media = 0;
   team.delanteros.forEach(element => {
     total += element.media;
-  })
+  });
   team.centrocampistas.forEach(element => {
     total += element.media;
-  })
+  });
   team.defensas.forEach(element => {
     total += element.media;
-  })
+  });
   total += team.portero.media;
 
   media = total / 11;
@@ -200,13 +235,14 @@ function end(){
   form.append("avg", media.toFixed(2));
   form.append("action", "insert");
   form.append("team", JSON.stringify(team));
-  axios.post('php-scripts/teamMgmt.php', form)
+  axios
+    .post("php-scripts/teamMgmt.php", form)
     .then(response => {
       console.log(response.data);
     })
     .catch(error => {
       console.log(error);
-    })
+    });
   //display summary
   document.getElementById("rating").innerHTML = media.toFixed(2);
   document.getElementById("summary").style.display = "inline";

@@ -29,6 +29,17 @@ function getBest($connection, $limit)
     $json = json_encode($array);
     return $json;
 }
+function getBestP($connection){
+    $query = mysqli_query($connection, "SELECT MAX(P.valoracion) AS valoracion, P.idUsuario, P.equipo, P.valoracion, P.fecha, U.Nombre FROM plantillas AS P INNER JOIN usuarios AS U ON P.idUsuario = U.Id");
+    $assoc = mysqli_fetch_assoc($query);
+    $array = [
+        "user" => $assoc['Nombre'],
+        "valoracion" => $assoc['valoracion'],
+        "equipo" => $assoc['equipo'],
+        "fecha" => $assoc['fecha']
+    ];
+    return json_encode($array);
+}
 function getBestU($connection, $limit)
 {
  $query = mysqli_query($connection, "SELECT U.Nombre, U.fecha, SUM(P.valoracion) AS Puntos FROM usuarios AS U INNER JOIN plantillas AS P ON P.idUsuario WHERE P.idUsuario = U.Id GROUP BY U.Nombre");    
@@ -50,3 +61,4 @@ function getBestU($connection, $limit)
 echo $_POST['action'] == "insert" ? insertTeam($con, $_POST['userid'], $_POST['avg'], $_POST['team']) : null;
 echo $_POST['action'] == "getBest" ? getBest($con, $_POST['limit']) : null;
 echo $_POST['action'] == "getBestU" ? getBestU($con, $_POST['limit']) : null;
+echo $_POST['action'] == "bestTeam" ? getBestP($con) : null;

@@ -37,6 +37,25 @@ function getBestTeams() {
       console.log(error);
     });
 }
+function getTop5Users() {
+  var form = new FormData();
+  form.append("action", "getBestU");
+  form.append("limit", limit);
+  axios
+    .post("php-scripts/teamMgmt.php", form)
+    .then(response => {
+      console.log(response.data);
+      response.data.forEach((element, index) => {
+        document.getElementById("top5").innerHTML += `
+          <a href="" class="list-group-item list-group-item-action ${
+            index == 0 ? "active" : null
+          }">${index + 1} - ${element.user} - ${element.valoracion}</a>`;
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
 function getBestUsers() {
   var form = new FormData();
   form.append("action", "getBestU");

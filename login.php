@@ -61,51 +61,9 @@ include("components/header.php");
       </div>
     </div>
   </div>
-  <footer class="row bg-dark">
-    <div class="col-3 ">
-      <h1>My<span class="color-green">Dream</span>Team</h1>
-      <hr />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-        sapien mauris, luctus eu risus quis, luctus dictum tortor. Suspendisse
-        potenti. Nulla sed molestie magna.
-      </p>
-    </div>
-    <div class="col-3">
-      <h1>My <span class="color-green">Account</span></h1>
-      <hr />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-        sapien mauris, luctus eu risus quis, luctus dictum tortor. Suspendisse
-        potenti. Nulla sed molestie magna.
-      </p>
-    </div>
-    <div class="col-3">
-      <h1>About <span class="color-green">Me</span></h1>
-      <hr />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-        sapien mauris, luctus eu risus quis, luctus dictum tortor. Suspendisse
-        potenti. Nulla sed molestie magna.
-      </p>
-    </div>
-    <div class="col-3">
-      <h1>Learn <span class="color-green">More</span></h1>
-      <hr />
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-        sapien mauris, luctus eu risus quis, luctus dictum tortor. Suspendisse
-        potenti. Nulla sed molestie magna.
-      </p>
-    </div>
-  </footer>
-  <div class="bottom-end row align-items-center">
-    <div class="col-sm">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      </p>
-    </div>
-  </div>
+  <?php
+    include("components/footer.php");
+  ?>
 </body>
 
 </html>

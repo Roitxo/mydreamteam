@@ -42,12 +42,12 @@ include("components/header.php");
                     <th scope="col">View</th>
                 </tr>
             </thead>
-            <tbody id="table-best-teams">
-                
-            </tbody>
+            <tbody id="table-best-teams"></tbody>
         </table>
     </div>
-
+    <?php
+        include("components/footer.php");
+    ?>
 </body>
 
 </html>

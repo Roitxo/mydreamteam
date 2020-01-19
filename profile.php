@@ -45,7 +45,9 @@ if (isset($_GET['user'])) {
             <p class="lead">User profile</p>
         </div>
     </div>
-    
+    <?php
+        include("components/footer.php");
+    ?>
 </body>
 
 </html>

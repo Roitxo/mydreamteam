@@ -71,9 +71,9 @@ function getBestUsers() {
             <td>${element.user}</td>
             <td>${element.valoracion}</td>
             <td>${element.fecha}</td>
-            <td><a href="team.php?id=${
-              element.id
-            }" class="btn btn-dark"><i class="fas fa-eye"></i></a></td>
+            <td><a href="profile.php?user=${
+              element.user
+            }" class="btn btn-dark"><i class="fas fa-user"></i></a></td>
           </tr>
         `;
       });

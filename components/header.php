@@ -3,7 +3,7 @@ session_start();
 $elements = [
     ["title" => "Home", "link" => "index.php"],
     ["title" => "XI", "link" => "XI.php"],
-    ["title" => "User Ranking", "link" => "index.php"],
+    ["title" => "User Ranking", "link" => "player-ranking.php"],
     ["title" => "Team Ranking", "link" => "team-ranking.php"],
     ["title" => "Players", "link" => "players.php"]
 ];

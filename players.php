@@ -43,7 +43,9 @@ include("components/header.php");
         <div id="goalkeepers" class="row">
         </div>
     </div>
-
+    <?php
+        include("components/footer.php");
+    ?>
 </body>
 
 </html>

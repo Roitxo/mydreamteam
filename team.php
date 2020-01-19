@@ -121,6 +121,9 @@ if (isset($_GET['id'])) {
             </center>
         </div>
     </div>
+    <?php
+        include("components/footer.php");
+    ?>
 </body>
 
 </html>

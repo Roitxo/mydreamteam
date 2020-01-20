@@ -40,7 +40,7 @@
                 <h1><span class="color-green" id="rating"></span></h1>
                 <h2>YOUR RATING</h2>
                 <p>Your team has been saved on your profile</p>
-                <button class="btn btn-dark">See Ranking</button>
+                <a href="team-ranking.php" class="btn btn-dark">See Ranking</a>
                 <a href="XI.php" class="btn btn-success">Try Again</a>
             </div>
         </div>

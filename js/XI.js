@@ -37,6 +37,19 @@ function getBestTeams() {
       console.log(error);
     });
 }
+function getUserDetails(id) {
+  var form = new FormData();
+  form.append("action", "userDetails");
+  form.append("id", id);
+  axios
+    .post("php-scripts/teamMgmt.php", form)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
 function getTop5Users() {
   var form = new FormData();
   form.append("action", "getBestU");

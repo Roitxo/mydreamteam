@@ -8,8 +8,11 @@ if (isset($_GET['user'])) {
     $assoc = mysqli_fetch_assoc($query);
     $id = $assoc['Id'];
     $num = mysqli_num_rows($query);
-    $q_equipos = mysqli_query($con, "SELECT * FROM usuarios AS U INNER JOIN plantillas AS P ON U.Id = P.idUsuario WHERE Nombre = '$user'");
+    $q_equipos = mysqli_query($con, "SELECT * FROM usuarios AS U INNER JOIN plantillas AS P ON U.Id = P.idUsuario WHERE U.Nombre = '$user'");
     $equipos = mysqli_fetch_array($query);
+    $q_overall = mysqli_query($con, "SELECT U.Nombre, U.fecha, ROUND(SUM(P.valoracion), 2) AS Puntos FROM usuarios AS U INNER JOIN plantillas AS P ON P.idUsuario WHERE U.Nombre = '$user' AND U.Id = P.idUsuario GROUP BY U.Nombre");
+    $assoc_overall = mysqli_fetch_assoc($q_overall);
+    $overall = $assoc_overall['Puntos'];
 } else {
     header('Location: index.php');
 }
@@ -37,20 +40,51 @@ if (isset($_GET['user'])) {
 
 <body>
     <?php
-        include("components/header.php");
-        echo $header;
+    include("components/header.php");
+    echo $header;
     ?>
     <div class="jumbotron jumbotron-fluid call-to-action bg-dark">
         <div class="container">
             <h1 class="display-4"><?php echo $num > 0 ? $user : "The user does not exist"; ?></h1>
-            <p class="lead">User profile</p>
+            <p class="lead">User profile. Registered on day <?php echo  $assoc['fecha']; ?> </p>
         </div>
     </div>
-    <div id="">
+    <center>
+        <div id="u-overall" class="row">
+            <div class="col-sm swing-in-top-fwd">
+                <h1><span class="color-green" id="rating"> <?php echo $overall; ?></span></h1>
+                <h2>USER RATING</h2>
+            </div>
+        </div>
+    </center>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Formation</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">View</th>
+                </tr>
+            </thead>
+            <tbody id="table-best-teams">
+                <?php 
+                    foreach ($q_equipos as $value) {
+                        echo '
+                        <tr>
+                            <td>'.$value["valoracion"].'</td>
+                            <td>'.$value["formacion"].'</td>
+                            <td>'.$value["fecha"].'</td>
+                            <td><a href="team.php?id='.$value["Id"].'" class="btn btn-dark"><i class="fas fa-eye"></i></a></td>
+                        </tr>';
+                    }
+                ?>
 
+            </tbody>
+        </table>
     </div>
     <?php
-        include("components/footer.php");
+    include("components/footer.php");
     ?>
 </body>
 

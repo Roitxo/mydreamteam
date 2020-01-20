@@ -57,8 +57,25 @@ function getBestU($connection, $limit)
     $json = json_encode($array);
     return $json;
 }
-
+function getUserDetails($connection, $id){
+    $user_details = mysqli_query($connection, "SELECT * FROM Id = $id");
+    $user_assoc = mysqli_fetch_assoc($user_details);
+    $val = mysqli_query($connection, "SELECT SUM(valoracion) AS valoracion FROM plantillas WHERE idUsuario = $id");
+    $val_assoc = mysqli_fetch_assoc($val);
+    $teams = mysqli_query($connection, "SELECT * FROM plantillas WHERE idUsuario = $id");
+    $array = ["fecha" => $user_assoc['fecha'], "valoracion" => $val_assoc["valoracion"], "equipos" => []];
+    foreach ($teams as $value) {
+        array_push($array['equipos'], [
+            "formacion" => $value["formacion"],
+            "equipo" => $value["equipo"],
+            "valoracion" => $value["valoracion"],
+            "fecha" => $value["fecha"]
+        ]);
+    }
+    return json_encode($array);
+}
 echo $_POST['action'] == "insert" ? insertTeam($con, $_POST['userid'], $_POST['avg'], $_POST['team']) : null;
 echo $_POST['action'] == "getBest" ? getBest($con, $_POST['limit']) : null;
 echo $_POST['action'] == "getBestU" ? getBestU($con, $_POST['limit']) : null;
 echo $_POST['action'] == "bestTeam" ? getBestP($con) : null;
+echo $_POST['action'] == "userDetails" ? getUserDetails($con, $_POST['id']) : null;

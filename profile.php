@@ -31,6 +31,7 @@ if (isset($_GET['user'])) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/XI.js"></script>
     <title>TeamMaker</title>
 </head>
 
@@ -44,6 +45,9 @@ if (isset($_GET['user'])) {
             <h1 class="display-4"><?php echo $num > 0 ? $user : "The user does not exist"; ?></h1>
             <p class="lead">User profile</p>
         </div>
+    </div>
+    <div id="">
+
     </div>
     <?php
         include("components/footer.php");

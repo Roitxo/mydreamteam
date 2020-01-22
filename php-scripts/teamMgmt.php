@@ -42,7 +42,7 @@ function getBestP($connection){
 }
 function getBestU($connection, $limit)
 {
- $query = mysqli_query($connection, "SELECT U.Nombre, U.fecha,  ROUND(SUM(P.valoracion), 2) AS Puntos FROM usuarios AS U INNER JOIN plantillas AS P ON P.idUsuario WHERE P.idUsuario = U.Id GROUP BY U.Nombre ORDER BY Puntos DESC");    
+ $query = mysqli_query($connection, "SELECT U.Nombre, U.fecha,  ROUND(SUM(P.valoracion), 2) AS Puntos FROM usuarios AS U INNER JOIN plantillas AS P ON P.idUsuario WHERE P.idUsuario = U.Id GROUP BY U.Nombre ORDER BY Puntos DESC LIMIT 5");    
  $array = [];
  $valArr = [];
     foreach($query as $key => $value) {

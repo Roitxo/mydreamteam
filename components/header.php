@@ -13,7 +13,7 @@ $header = "
 <div id='subheader-col-2' class='col-2 subheader-col '>";
 
 if (isset($_SESSION['nombre'])) {
-    $header .= "<small>Hello, " . $_SESSION['nombre'] . "</small>";
+    $header .= "<small>Hello, " . htmlentities($_SESSION['nombre']) . "</small>";
     $header .= ' - ';
     $header .= "<a href='profile.php?user=".$_SESSION['nombre']."'><i class='fas fa-user'></i>
         </a><button class='btn' onclick='logout()'><i class='fas fa-sign-out-alt'></i></button>";

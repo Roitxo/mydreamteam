@@ -44,7 +44,8 @@ function getBestU($connection, $limit)
 {
  $query = mysqli_query($connection, "SELECT U.Nombre, U.fecha,  ROUND(SUM(P.valoracion), 2) AS Puntos FROM usuarios AS U INNER JOIN plantillas AS P ON P.idUsuario WHERE P.idUsuario = U.Id GROUP BY U.Nombre ORDER BY Puntos DESC");    
  $array = [];
-    foreach($query as $value) {
+ $valArr = [];
+    foreach($query as $key => $value) {
         array_push(
             $array,
             [
@@ -53,7 +54,9 @@ function getBestU($connection, $limit)
                 "fecha" => $value["fecha"]
             ]
         );
+        $valArr[$key] = $value['valoracion'];
     }
+    array_multisort($valArr, SORT_DESC, $array);
     $json = json_encode($array);
     return $json;
 }

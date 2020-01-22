@@ -30,9 +30,8 @@ function register($connection ,$user, $pass){
         mysqli_query($connection, "INSERT INTO usuarios (Nombre, Pass, fecha) VALUES ('$user', AES_ENCRYPT('$pass', 'MyDreamPHP*'), '$today')");
         return "registered";
     }
-    
 }
 //exec
-echo $action == "login" ? login($con, strtolower($_POST['username']), $_POST['pass']) : null;
+echo $action == "login" ? login($con, trim(strtolower($_POST['username'])), $_POST['pass']) : null;
 echo $action == "logout" ? logout() : null;
-echo $action == "register" ? register($con, strtolower($_POST['username']),$_POST['pass']) : null;
+echo $action == "register" ? register($con, trim(htmlentities(strtolower($_POST['username']))),$_POST['pass']) : null;

@@ -169,7 +169,7 @@ function getPlayers(formation) {
       console.log(error);
     });
 }
-function choosePlayer(players, num, pos, pos2, callback) {
+function choosePlayer(num, pos, pos2, callback) {
   document.getElementById("dialogChoosePlayerBoxes").innerHTML = "";
   for (let index = num; index < num + 3; index++) {
     if (pos == "delantero") {

@@ -170,6 +170,9 @@ function getPlayers(formation) {
     .catch(error => {
       console.log(error);
     });
+  this.showProtected = function() {
+    return players;
+  };
 }
 function choosePlayer(num, pos, pos2, callback) {
   var obj = new getPlayers("433");

@@ -1,5 +1,4 @@
 //data
-var players = new Object();
 
 var counter = 0;
 var team = {
@@ -102,14 +101,7 @@ function getAllPlayers() {
   axios
     .post("php-scripts/playersMgmt.php", formData)
     .then(response => {
-      players = response.data;
-      Object.defineProperty(players, "secret", {
-        value: 42,
-        writable: false,
-        enumerable: true,
-        configurable: false
-      });
-      players.delanteros.forEach(element => {
+      response.data.delanteros.forEach(element => {
         var html = `
           <div class="col-2">
               <div class="card">
@@ -120,7 +112,7 @@ function getAllPlayers() {
         `;
         document.getElementById("strikers").innerHTML += html;
       });
-      players.centrocampistas.forEach(element => {
+      response.data.centrocampistas.forEach(element => {
         var html = `
           <div class="col-2">
               <div class="card">
@@ -131,7 +123,7 @@ function getAllPlayers() {
         `;
         document.getElementById("mid").innerHTML += html;
       });
-      players.defensas.forEach(element => {
+      response.data.defensas.forEach(element => {
         var html = `
           <div class="col-2">
               <div class="card">
@@ -142,7 +134,7 @@ function getAllPlayers() {
         `;
         document.getElementById("defenders").innerHTML += html;
       });
-      players.porteros.forEach(element => {
+      response.data.porteros.forEach(element => {
         var html = `
           <div class="col-2">
               <div class="card">
@@ -170,14 +162,18 @@ function getPlayers(formation) {
   axios
     .post("php-scripts/playersMgmt.php", formData)
     .then(response => {
-      players = response.data;
-      console.log(players);
+      const players = response.data;
+      this.showProtected = function() {
+        return players;
+      };
     })
     .catch(error => {
       console.log(error);
     });
 }
 function choosePlayer(num, pos, pos2, callback) {
+  var obj = new getPlayers("433");
+  var players = obj.showProtected();
   document.getElementById("dialogChoosePlayerBoxes").innerHTML = "";
   for (let index = num; index < num + 3; index++) {
     if (pos == "delantero") {
@@ -268,21 +264,23 @@ function end() {
   window.scrollTo(0, 0);
 
   //insert team
-  var form = new FormData();
-  form.append("userid", document.getElementById("userid").value);
-  form.append("avg", media.toFixed(2));
-  form.append("action", "insert");
-  form.append("team", JSON.stringify(team));
-  axios
-    .post("php-scripts/teamMgmt.php", form)
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  //display summary
-  document.getElementById("rating").innerHTML = media.toFixed(2);
-  document.getElementById("summary").style.display = "inline";
+  if (media < 96) {
+    var form = new FormData();
+    form.append("userid", document.getElementById("userid").value);
+    form.append("avg", media.toFixed(2));
+    form.append("action", "insert");
+    form.append("team", JSON.stringify(team));
+    axios
+      .post("php-scripts/teamMgmt.php", form)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    //display summary
+    document.getElementById("rating").innerHTML = media.toFixed(2);
+    document.getElementById("summary").style.display = "inline";
+  }
 }
 //mounted

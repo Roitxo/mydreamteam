@@ -1,5 +1,4 @@
 //data
-var players = new Object();
 var counter = 0;
 var team = {
   delanteros: [],
@@ -101,7 +100,7 @@ function getAllPlayers() {
   axios
     .post("php-scripts/playersMgmt.php", formData)
     .then(response => {
-      players = response.data;
+      const players = response.data;
       players.delanteros.forEach(element => {
         var html = `
           <div class="col-2">

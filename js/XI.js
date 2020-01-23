@@ -1,4 +1,6 @@
 //data
+var players = new Object();
+
 var counter = 0;
 var team = {
   delanteros: [],
@@ -100,7 +102,13 @@ function getAllPlayers() {
   axios
     .post("php-scripts/playersMgmt.php", formData)
     .then(response => {
-      const players = response.data;
+      players = response.data;
+      Object.defineProperty(players, "secret", {
+        value: 42,
+        writable: false,
+        enumerable: true,
+        configurable: false
+      });
       players.delanteros.forEach(element => {
         var html = `
           <div class="col-2">

@@ -164,6 +164,7 @@ function getPlayers(formation) {
     .post("php-scripts/playersMgmt.php", formData)
     .then(response => {
       players = response.data;
+      Object.freeze(players);
     })
     .catch(error => {
       console.log(error);

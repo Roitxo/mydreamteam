@@ -29,55 +29,56 @@
 @-webkit-keyframes swing-in-top-fwd {
   0% {
     -webkit-transform: rotateX(-100deg);
-            transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
     opacity: 0;
   }
   100% {
     -webkit-transform: rotateX(0deg);
-            transform: rotateX(0deg);
+    transform: rotateX(0deg);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
     opacity: 1;
   }
 }
 @keyframes swing-in-top-fwd {
   0% {
     -webkit-transform: rotateX(-100deg);
-            transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
     opacity: 0;
   }
   100% {
     -webkit-transform: rotateX(0deg);
-            transform: rotateX(0deg);
+    transform: rotateX(0deg);
     -webkit-transform-origin: top;
-            transform-origin: top;
+    transform-origin: top;
     opacity: 1;
   }
 }
 html {
   scroll-behavior: smooth;
 }
-.inline{
+.inline {
   display: inline;
 }
-.media{
+.media {
   font-size: 30px;
 }
 .swing-in-top-fwd {
-	-webkit-animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
-	animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+  -webkit-animation: swing-in-top-fwd 0.5s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
-.form input{
+.form input {
   width: 65%;
 }
-#app{
+#app {
   padding: 6% 0% 6% 0%;
 }
-#summary{
+#summary {
   padding: 3%;
   display: none;
 }
@@ -118,7 +119,7 @@ footer p {
 .nomargin {
   margin: 0;
 }
-#navbar{
+#navbar {
   position: sticky;
   top: 0;
   z-index: 20;
@@ -133,7 +134,7 @@ footer p {
 .nav {
   font-family: "Roboto Condensed", sans-serif;
 }
-.link-active{
+.link-active {
   color: #343a40;
 }
 .bg-green {
@@ -149,7 +150,7 @@ footer p {
   width: 100px;
   background-color: #343a40;
   margin-left: 15%;
-  box-shadow: 0px 3px 51px 0px rgba(0,0,0,0.34);
+  box-shadow: 0px 3px 51px 0px rgba(0, 0, 0, 0.34);
   z-index: 25;
 }
 .jumbo-home {
@@ -220,6 +221,7 @@ footer p {
 }
 .pitch {
   background-image: url(../img/grass_night.png);
+  background-position: center;
   background-size: cover;
   padding: 2%;
 }

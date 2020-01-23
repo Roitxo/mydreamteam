@@ -1,4 +1,5 @@
 //data
+var players = new Object();
 
 var counter = 0;
 var team = {
@@ -162,21 +163,13 @@ function getPlayers(formation) {
   axios
     .post("php-scripts/playersMgmt.php", formData)
     .then(response => {
-      const players = response.data;
-      this.showProtected = function() {
-        return players;
-      };
+      players = response.data;
     })
     .catch(error => {
       console.log(error);
     });
-  this.showProtected = function() {
-    return players;
-  };
 }
-function choosePlayer(num, pos, pos2, callback) {
-  var obj = new getPlayers("433");
-  var players = obj.showProtected();
+function choosePlayer(players, num, pos, pos2, callback) {
   document.getElementById("dialogChoosePlayerBoxes").innerHTML = "";
   for (let index = num; index < num + 3; index++) {
     if (pos == "delantero") {
@@ -267,7 +260,7 @@ function end() {
   window.scrollTo(0, 0);
 
   //insert team
-  if (media < 96) {
+  if (media < 97) {
     var form = new FormData();
     form.append("userid", document.getElementById("userid").value);
     form.append("avg", media.toFixed(2));
@@ -281,9 +274,10 @@ function end() {
       .catch(error => {
         console.log(error);
       });
-    //display summary
     document.getElementById("rating").innerHTML = media.toFixed(2);
     document.getElementById("summary").style.display = "inline";
   }
+
+  //display summary
 }
 //mounted
